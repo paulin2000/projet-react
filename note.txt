@@ -1,0 +1,9 @@
+npm -i install react-router react-router-dom 
+
+pour chaque projet faire l'arborescence des composants
+
+rfc et rsc : raccourci ou snippet
+
+Outlet: react router dom
+
+les notions d'active ne fonctionne que sur navlink
