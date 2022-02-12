@@ -7,3 +7,5 @@ rfc et rsc : raccourci ou snippet
 Outlet: react router dom
 
 les notions d'active ne fonctionne que sur navlink
+
+ctrl / pour mettre le texte selection en commentaire
