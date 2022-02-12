@@ -9,3 +9,12 @@ Outlet: react router dom
 les notions d'active ne fonctionne que sur navlink
 
 ctrl / pour mettre le texte selection en commentaire
+
+faire évoluer les données de useState de façon dynamique
+setData permet de mettre à jour le state
+
+toujours mettre un return dans la methode map
+
+pour faire un tri sur un tableau convertir le tableau en objet
+
+label et le input sont liées par l'id coté input et htmlFor coté label
