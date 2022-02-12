@@ -1,62 +1,88 @@
-import React, { useEffect } from 'react';
-import { useState } from 'react';
-import axios from "axios"
-import Card from './Card';
+import React, { useEffect } from "react";
+import { useState } from "react";
+import axios from "axios";
+import Card from "./Card";
 
 const Countries = () => {
-
-  const [data, setData] = useState([])
-  const [sortedData, setSortedData] = useState([])
-  const [rangeValue, setRangeValue] = useState(30)
-  const [selectedRadio, setSelectedRadio] = useState("")
-  const radios = ['Africa', 'America', 'Asia', 'Europe', 'Oceania']
+  const [data, setData] = useState([]);
+  const [sortedData, setSortedData] = useState([]);
+  const [rangeValue, setRangeValue] = useState(30);
+  const [selectedRadio, setSelectedRadio] = useState();
+  const radios = ["Africa", "America", "Asia", "Europe", "Oceania"];
   useEffect(() => {
     const config = {
       headers: {
-        'Access-Control-Allow-Origin': '*',
-        "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept"
-      }
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Headers":
+          "Origin, X-Requested-With, Content-Type, Accept",
+      },
     };
     axios
-    .get("https://restcountries.com/v2/all?fields=name,capital,population,flag", config)
-    .then(res => setData(res.data))
-    .catch(err => console.log(err))
-
-
-  },[])
+      .get(
+        "https://restcountries.com/v2/all?fields=name,capital,region,population,flag",
+        config
+      )
+      .then((res) => setData(res.data))
+      .catch((err) => console.log(err));
+  }, []);
 
   useEffect(() => {
     const sortedCountry = () => {
-        if (data !== []) {
-          const countryObj = Object.keys(data).map( i  => data[i])
-          const sortedArrayByName = countryObj.sort((a, b) => {return b.population - a.population})
-          sortedArrayByName.length = rangeValue
-          return sortedArrayByName
-        }     
-    }
-    setSortedData(sortedCountry())
-  },[data, rangeValue])
-      
-   
+      if (data !== []) {
+        const countryObj = Object.keys(data).map((i) => data[i]);
+        const sortedArrayByName = countryObj.sort((a, b) => {
+          return b.population - a.population;
+        });
+        sortedArrayByName.length = rangeValue;
+        return sortedArrayByName;
+      }
+    };
+    setSortedData(sortedCountry());
+  }, [data, rangeValue]);
+
   return (
-    <div className='countries'>
+    <div className="countries">
       <div className="sort-container">
-        <input type="range" min="1" max="250" value={rangeValue} onChange={(e) => setRangeValue(e.target.value)}/>
+        <input
+          type="range"
+          min="1"
+          max="250"
+          value={rangeValue}
+          onChange={(e) => setRangeValue(e.target.value)}
+        />
         <ul>
-          {radios.map(radio => {
-            return(
+          {radios.map((radio) => {
+            return (
               <li key={radio}>
-                <input type="radio" value={radio} id={radio} />
+                <input
+                  type="radio"
+                  value={radio}
+                  id={radio}
+                  checked={radio === selectedRadio}
+                  onChange={e => setSelectedRadio(e.target.value)}
+                />
                 <label htmlFor={radio}>{radio}</label>
               </li>
-            )
+            );
           })}
         </ul>
       </div>
+      <div className="cancel">
+        {selectedRadio && <h5 onClick={() => setSelectedRadio("")}>Annuler la recherche</h5> } 
+      </div>
       <ul className="countries-list">
-        { (sortedData!==[]) && sortedData.map(country => {
-          return(<Card country={country} key={country.name}/>)
-        })}
+        {sortedData !== [] &&
+          ( selectedRadio ? 
+            sortedData.filter(country => country.region.includes(selectedRadio))
+            .map((country) => {
+              return <Card country={country} key={country.name} />;
+            }) : 
+            sortedData
+            .map((country) => {
+              return <Card country={country} key={country.name} />;
+            }) 
+          )
+        }
       </ul>
     </div>
   );
