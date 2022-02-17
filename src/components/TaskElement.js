@@ -5,7 +5,6 @@ const TaskElement = ({ task, taskIndex, tasks, setTasks }) => {
 
   const [toggle, setToggle] = useState(true);
  
-
   const updateTitle = (e) => {
     if (e.key === "Enter") {
       let newTasks = tasks;
@@ -16,11 +15,10 @@ const TaskElement = ({ task, taskIndex, tasks, setTasks }) => {
 
   };
 
- const deleteMessage = () => {
+  const deleteMessage = () => {
     let newTasks = tasks.filter((element, index) => index !== taskIndex);
     setTasks(newTasks);
   };
-
 
   const updateChecked = (e) => {
     let newTasks = tasks;
@@ -50,7 +48,6 @@ const TaskElement = ({ task, taskIndex, tasks, setTasks }) => {
           ) 
         :
           (
-        
             <input
               className="edit"
               type="text"
