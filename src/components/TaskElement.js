@@ -34,31 +34,34 @@ const TaskElement = ({ task, taskIndex, tasks, setTasks }) => {
 
   return (
     <>
-      {toggle === true ? (
-        <div className="view">
-          <input
-            className="toggle"
-            type="checkbox"
-            checked={task.completed}
-            onChange={updateChecked}
-          />
-          <label onDoubleClick={() => setToggle(!toggle)}>{task.title}</label>
-          <button className="destroy" onClick={deleteMessage}>&#10005;</button>
-        </div>
-      ) : (
-        <>
-          <input
-            className="edit"
-            type="text"
-            defaultValue={task.title}
-            onBlur={(e) => {
-              updateTitle(e)
-              setToggle(!toggle)
-            }}
-            onKeyPress={updateTitle}
-          />
-        </>
-      )}
+      { toggle === true 
+        ? 
+          (
+            <div className="view">
+              <input
+                className="toggle"
+                type="checkbox"
+                checked={task.completed}
+                onChange={updateChecked}
+              />
+              <label onDoubleClick={() => setToggle(!toggle)}>{task.title}</label>
+              <button className="destroy" onClick={deleteMessage}>&#10005;</button>
+            </div>
+          ) 
+        :
+          (
+        
+            <input
+              className="edit"
+              type="text"
+              defaultValue={task.title}
+              onBlur={(e) => {
+                updateTitle(e)
+                setToggle(!toggle)
+              }}
+              onKeyPress={updateTitle}
+            />
+          )}
     </>
   );
 };
