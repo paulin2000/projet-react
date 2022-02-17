@@ -2,8 +2,10 @@ import React from "react";
 import { useState } from "react";
 
 const TaskElement = ({ task, taskIndex, tasks, setTasks }) => {
+
   const [toggle, setToggle] = useState(true);
  
+
   const updateTitle = (e) => {
     if (e.key === "Enter") {
       let newTasks = tasks;
@@ -11,24 +13,24 @@ const TaskElement = ({ task, taskIndex, tasks, setTasks }) => {
       setTasks([...newTasks]);
       setToggle(!toggle);
     }
+
   };
 
-  const deleteMessage = () => {
+ const deleteMessage = () => {
     let newTasks = tasks.filter((element, index) => index !== taskIndex);
     setTasks(newTasks);
   };
 
 
-    const updateChecked = (e) => {
-    
-      let newTasks = tasks;
-      const newTask = {
-        title: task.title,
-        completed: !task.completed,
-      };
-      newTasks[taskIndex] = newTask;
-      setTasks([...newTasks]);
+  const updateChecked = (e) => {
+    let newTasks = tasks;
+    const newTask = {
+      title: task.title,
+      completed: !task.completed,
     };
+    newTasks[taskIndex] = newTask;
+    setTasks([...newTasks]);
+  };
 
   return (
     <>

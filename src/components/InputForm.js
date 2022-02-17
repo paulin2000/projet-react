@@ -1,26 +1,25 @@
 import React from "react";
 
-const InputForm = ({setTasks, hide, setHide}) => {
+const InputForm = ({ setTasks, hide, setHide }) => {
+  
   const onKeyPressHandler = (e) => {
-
-
     if (e.key === "Enter") {
-
       const newTaskTitle = e.target.value;
       const newTask = {
         title: newTaskTitle,
         completed: false,
       };
-      setTasks((oldArray) => [newTask, ...oldArray ]);
+      setTasks((oldArray) => [newTask, ...oldArray]);
       e.target.value = "";
     }
   };
 
   return (
     <header className="header">
-      
       <h1>todos</h1>
-      <span id={hide? "hide-selected":"hide"} onClick={()=>setHide(!hide)}>❯</span>
+      <span id={hide ? "hide-selected" : "hide"} onClick={() => setHide(!hide)}>
+        ❯
+      </span>
       <input
         className="new-todo"
         type="text"

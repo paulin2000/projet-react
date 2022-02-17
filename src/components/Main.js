@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import TaskElement from "./TaskElement";
 
-const Main = ({ tasks, setTasks, filter, hide, filterTasks }) => {
+const Main = ({tasks, setTasks, filter, hide, filterTasks}) => {
   
-
   const filteredTasks = filterTasks(tasks, filter);
 
   return (
